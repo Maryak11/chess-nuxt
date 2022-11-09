@@ -10,3 +10,10 @@
     @apply w-16 h-16 flex justify-center items-center;
   }
 }
+
+.available {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: rgb(95, 70, 236);
+}

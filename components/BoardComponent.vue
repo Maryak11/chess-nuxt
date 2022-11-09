@@ -6,6 +6,7 @@
     >
       <div v-for="row in cell">
         <CellComponent
+          @clickCell="clickCell"
           :cell="row"
           :selected="row.x === selectedCell?.x && row.y === selectedCell?.y"
         />
@@ -23,5 +24,13 @@ const props = defineProps({
   },
 });
 
-const selectedCell: Cell | null = ref(null);
+const selectedCell = ref<Cell | null>(null);
+
+const clickCell = (event: Cell) => {
+  console.log(event);
+
+  if (event.figure) {
+    selectedCell.value = event;
+  }
+};
 </script>

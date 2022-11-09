@@ -1,8 +1,13 @@
 <template>
   <div
-    class="cell"
-    :class="cell.color"
+    class="cell transition-all"
+    :class="[cell.color, selected ? ' [background-color:_red_!important]' : '']"
+    @click="click(cell)"
   >
+    <div
+      v-if="!cell.figure"
+      :class="['available']"
+    ></div>
     <img
       v-if="cell?.figure?.logo"
       class="w-9"
@@ -22,6 +27,13 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const emits = defineEmits<{
+  (e: 'clickCell', cell: Cell): void;
+}>();
+
+const click = (event: Cell) => {
+  emits('clickCell', event);
+};
 // console.log(props.selected);
 </script>
 <style>
