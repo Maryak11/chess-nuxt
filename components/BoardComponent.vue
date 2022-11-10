@@ -27,10 +27,26 @@ const props = defineProps({
 const selectedCell = ref<Cell | null>(null);
 
 const clickCell = (event: Cell) => {
-  console.log(event);
-
-  if (event.figure) {
+  if (
+    selectedCell.value &&
+    selectedCell.value !== event &&
+    selectedCell.value.figure?.canMove(event)
+  ) {
+    selectedCell.value.moveFigure(event);
+    selectedCell.value = null;
+  } else {
     selectedCell.value = event;
   }
 };
+
+const highlightCells = (selectedCell: Cell) => {
+  props.board.highlightCells(selectedCell);
+};
+
+watch(
+  () => selectedCell.value,
+  (nv: Cell) => {
+    highlightCells(nv);
+  },
+);
 </script>

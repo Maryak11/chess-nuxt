@@ -1,11 +1,15 @@
 <template>
   <div
     class="cell transition-all"
-    :class="[cell.color, selected ? ' [background-color:_red_!important]' : '']"
+    :class="[
+      cell.color,
+      selected ? ' [background-color:_red_!important]' : '',
+      cell.available ? ' [background-color:_green_!important]' : '',
+    ]"
     @click="click(cell)"
   >
     <div
-      v-if="!cell.figure"
+      v-if="!cell.figure && cell.available"
       :class="['available']"
     ></div>
     <img
@@ -34,7 +38,6 @@ const emits = defineEmits<{
 const click = (event: Cell) => {
   emits('clickCell', event);
 };
-// console.log(props.selected);
 </script>
 <style>
 .white {
