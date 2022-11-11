@@ -4,7 +4,7 @@
     :class="[
       cell.color,
       selected ? ' [background-color:_red_!important]' : '',
-      cell.available ? ' [background-color:_green_!important]' : '',
+      cell.available && cell.figure ? ' [background-color:_green_!important]' : '',
     ]"
     @click="click(cell)"
   >

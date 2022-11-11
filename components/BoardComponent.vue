@@ -27,6 +27,8 @@ const props = defineProps({
 const selectedCell = ref<Cell | null>(null);
 
 const clickCell = (event: Cell) => {
+  console.log(event);
+
   if (
     selectedCell.value &&
     selectedCell.value !== event &&
