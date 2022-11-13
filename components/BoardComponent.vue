@@ -1,9 +1,6 @@
 <template>
   <div class="board">
-    <div
-      v-for="(cell, index) in board.cells"
-      :key="index"
-    >
+    <div v-for="(cell, index) in board.cells" :key="index">
       <div v-for="row in cell">
         <CellComponent
           @clickCell="clickCell"
@@ -17,18 +14,22 @@
 
 <script setup lang="ts">
 import { Cell } from '~/models/Cell';
+import { Player } from '~~/models/Player';
 import { Board } from '../models/Board';
-const props = defineProps({
-  board: {
-    type: Board,
-  },
-});
+
+interface Props {
+  board: Board;
+  currentPlayer: Player;
+}
+const props = defineProps<Props>();
+
+const emits = defineEmits<{
+  (e: 'swap'): void;
+}>();
 
 const selectedCell = ref<Cell | null>(null);
 
 const clickCell = (event: Cell) => {
-  console.log(event);
-
   if (
     selectedCell.value &&
     selectedCell.value !== event &&
@@ -36,8 +37,11 @@ const clickCell = (event: Cell) => {
   ) {
     selectedCell.value.moveFigure(event);
     selectedCell.value = null;
+    emits('swap');
   } else {
-    selectedCell.value = event;
+    if (props.currentPlayer.color === event.figure.colors) {
+      selectedCell.value = event;
+    }
   }
 };
 

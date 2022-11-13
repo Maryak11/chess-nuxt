@@ -25,23 +25,6 @@ export class Cell {
     return this.figure === null;
   }
 
-  // isEmptyVertical(target: Cell): boolean {
-  //   if (this.x !== target.x) {
-  //     return false;
-  //   }
-
-  //   const min = Math.min(this.y, target.y);
-  //   const max = Math.max(this.y, target.y);
-
-  //   for (let y = min + 1; y < max; y++) {
-  //     if (!this.board.getCell(y, this.x).isEmpty()) {
-  //       return false;
-  //     }
-  //   }
-
-  //   return true;
-  // }
-
   isEmptyVertical(target: Cell): boolean {
     if (this.x !== target.x) {
       return false;
